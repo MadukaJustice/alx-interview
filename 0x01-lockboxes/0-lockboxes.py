@@ -1,18 +1,25 @@
 #!/usr/bin/python3
-""" Lockbox problem algorithm """
+"""
+0-lockboxes
+"""
 
 
 def canUnlockAll(boxes):
+    """
+    determines if all the boxes can be opened given a list of boxes
+
+    Args:
+        boxes (list): list of boxes
+
+    Returns:
+        bool: True if all boxes can be opened, else False
+    """
     keys = [0]
+    for key in keys:
+        for _key in boxes[key]:
+            if _key not in keys and _key < len(boxes):
+                keys.append(_key)
 
-    for i in keys:
-        for key in boxes[i]:
-            if key < len(boxes) and key not in keys:
-                keys.append(key)
-
-    box_list = [j for box in boxes for j in box]
-
-    if set(box_list).issubset(set(keys)):
+    if len(keys) == len(boxes):
         return True
-
     return False
