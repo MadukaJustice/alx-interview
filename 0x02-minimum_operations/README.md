@@ -1,1 +1,1 @@
-# Minimum operations
+# Minimum operations algorithm in Python
