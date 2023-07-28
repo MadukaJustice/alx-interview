@@ -1,1 +1,1 @@
-# UTF-8 Validation algorithm
+# UTF-8 Validation algorith
