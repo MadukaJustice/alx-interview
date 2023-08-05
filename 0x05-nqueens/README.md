@@ -1,1 +1,1 @@
-# N-Queens algorithm implementation in pytho
+# N-Queens algorithm implementation in python
