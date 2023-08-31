@@ -1,33 +1,63 @@
 #!/usr/bin/python3
 """
-    Module to solve island perimeter problem
+Island Perimeter Problem
 """
 
 
 def island_perimeter(grid):
     """
-        Compute perimeter of the grids containing "1"
+    Calculates the perimeter of an island given by the gird representation
     """
-    len_row = len(grid)
-    len_col = len(grid[0])
-    perim = 0
+    perimeter = 0
+    height = len(grid)
+    width = len(grid[0])
 
-    for row in range(len_row):
-        for col in range(len_col):
-            if grid[row][col] == 1:
-                """
-                    check for land
-                """
-                if row == 0 or grid[row - 1][col] == 0:
-                    """check top"""
-                    perim += 1
-                if (row + 1) == len_row or grid[row + 1][col] == 0:
-                    """check bottom"""
-                    perim += 1
-                if col == 0 or grid[row][col - 1] == 0:
-                    """check left"""
-                    perim += 1
-                if (col + 1) == len_col or grid[row][col + 1] == 0:
-                    """check right"""
-                    perim += 1
-    return perim
+    next_cells = []
+    visited_cells = []
+
+    for i in range(0, height):
+        if (len(next_cells)):
+            break
+        for j in range(0, width):
+            if (grid[i][j] == 0):
+                continue
+            else:
+                next_cells.append((i, j))
+                break
+
+    if (len(next_cells) == 0):
+        return perimeter
+
+    while (len(next_cells) > 0):
+        cell = next_cells.pop()
+        if cell in visited_cells:
+            continue
+
+        left = (cell[0], cell[1] - 1)
+        top = (cell[0] - 1, cell[1])
+        right = (cell[0], cell[1] + 1)
+        bottom = (cell[0] + 1, cell[1])
+
+        if (left[1] < 0 or grid[left[0]][left[1]] == 0):
+            perimeter += 1
+        else:
+            next_cells.append(left)
+
+        if (top[0] < 0 or grid[top[0]][top[1]] == 0):
+            perimeter += 1
+        else:
+            next_cells.append(top)
+
+        if (right[1] >= width or grid[right[0]][right[1]] == 0):
+            perimeter += 1
+        else:
+            next_cells.append(right)
+
+        if (bottom[0] >= height or grid[bottom[0]][bottom[1]] == 0):
+            perimeter += 1
+        else:
+            next_cells.append(bottom)
+
+        visited_cells.append(cell)
+
+    return perimeter
